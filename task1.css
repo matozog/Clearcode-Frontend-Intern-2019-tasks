@@ -2,9 +2,13 @@ body{
     margin: 0px;
 }
 
-#navbar{
+/* Navbar */
+
+.navbar{
     background-color:rgb(37, 45, 117);
 }
+
+/* Navbar - list elements */
 
 #navbar-item-contact{
     float: right;
@@ -29,4 +33,28 @@ li:hover{
     background-color: rgb(47, 167, 225);
 }
 
-/*(49, 165, 229)*/
+/* Navbar - dropdown element */
+
+.dropdown-content {
+    position: absolute;
+    display: none;
+    margin: 16px -20px;
+    min-width: 150px;
+    box-shadow: 0px 4px 6px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content li {
+    padding: 12px 20px;
+    color: black;
+    display: block;
+    text-align:left;
+    float: none;
+}
+
+.dropdown-content li:hover {
+    background-color: rgb(49, 165, 229);
+}
