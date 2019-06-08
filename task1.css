@@ -1,0 +1,32 @@
+body{
+    margin: 0px;
+}
+
+#navbar{
+    background-color:rgb(37, 45, 117);
+}
+
+#navbar-item-contact{
+    float: right;
+}
+
+ul{
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+li{
+    float: left;
+    display: block;
+    text-align: center;
+    padding: 16px 20px;
+    color: white;
+}
+
+li:hover{
+    cursor: pointer;
+    background-color: rgb(47, 167, 225);
+}
+
+/*(49, 165, 229)*/
