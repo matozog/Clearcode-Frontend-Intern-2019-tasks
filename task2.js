@@ -15,6 +15,13 @@ const board = [
 // [ 5, 9, 2, 2, 4, 8 ]
 
 // [ 0, 0, 0, 0, 0, 7 ],
+// [ 1, 0, 0, 5, 1, 4 ],
+// [ 3, 0, 0, 9, 7, 6 ],
+// [ 9, 0, 0, 3, 6, 2 ],
+// [ 1, 8, 0, 1, 8, 7 ],
+// [ 5, 2, 2, 2, 4, 8 ]
+
+// [ 0, 0, 0, 0, 0, 7 ],
 // [ 1, 0, 0, 0, 1, 4 ],
 // [ 3, 0, 0, 5, 7, 6 ],
 // [ 9, 0, 0, 9, 6, 2 ],
@@ -24,10 +31,12 @@ const board = [
 function riddleSolver(board){
     board.map((row, rowIndex, board) => {
         row.map((number, numberIndex) => {
-            if(numberIndex<row.length-2)
-                checkHorizontally(board, row, numberIndex, number, rowIndex)
-            if(rowIndex<board.length-2)
-                checkVertically(board, row, board[rowIndex+1], board[rowIndex+2], numberIndex, number )
+            if(number!==0){
+                if(numberIndex<row.length-2)
+                    checkHorizontally(board, row, numberIndex, number, rowIndex)
+                if(rowIndex<board.length-2)
+                    checkVertically(board, row, board[rowIndex+1], board[rowIndex+2], numberIndex, number, rowIndex )
+            }
         })
     })
     console.log(board)
@@ -46,23 +55,39 @@ function checkHorizontally(board, row, numberIndex, number, rowIndex){
 function dropIntegersHorizontally(board, numberIndex, rowIndex){
     let tmpRowIndex = rowIndex
     while(tmpRowIndex-1 >= 0){
-        swap(board,rowIndex, numberIndex)
+        for(let i=0; i<3; i=i+1){
+            swap(board, tmpRowIndex, numberIndex+i)
+        }
         tmpRowIndex=tmpRowIndex-1
     }
 }
 
 function swap(board, rowIndex, numberIndex){
-    let tmp = ''
-    for(i=0; i<3; i++){
-        tmp = board[rowIndex][numberIndex+i]
-        board[rowIndex][numberIndex+i] = board[rowIndex-1][numberIndex+i]
-        board[rowIndex-1][numberIndex+i]=tmp
+    let tmp = board[rowIndex][numberIndex]
+    board[rowIndex][numberIndex] = board[rowIndex-1][numberIndex]
+    board[rowIndex-1][numberIndex]=tmp
+}
+
+function checkVertically(board, firstRow, secondRow, thirdRow, numberIndex, number, rowIndex){
+    if(secondRow[numberIndex] === number && thirdRow[numberIndex] == number){
+        firstRow[numberIndex] = 0
+        secondRow[numberIndex] = 0
+        thirdRow[numberIndex] = 0
+        if(board[rowIndex-1][numberIndex]!=0){
+            dropIntegersVertically(board, numberIndex, rowIndex)
+        }
     }
 }
 
-function checkVertically(board, firstRow, secondRow, thirdRow, numberIndex, number){
-    if(secondRow[numberIndex] === number && thirdRow[numberIndex] == number){
-        console.log("drop vertically")
+function dropIntegersVertically(board, numberIndex, rowIndex){
+    let tmpRowIndex = rowIndex
+    while(tmpRowIndex-1 >=0 && board[tmpRowIndex-1][numberIndex] !== 0){
+        let tmpI = 0
+        do{
+            swap(board, tmpRowIndex + tmpI, numberIndex  )
+            tmpI = tmpI + 1
+        }while((tmpRowIndex + tmpI) < board.length && board[tmpRowIndex+tmpI][numberIndex] === 0)
+        tmpRowIndex = tmpRowIndex - 1
     }
 }
 
