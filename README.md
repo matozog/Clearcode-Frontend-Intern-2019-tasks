@@ -1,4 +1,4 @@
-# Clearcode-Frontend-Intern-2019-tasks
+# Frontend-Intern-2019-tasks
 
 ### Task 1
 To run the solution you need a browser and then you can run task1.html file.
